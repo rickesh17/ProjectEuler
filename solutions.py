@@ -1,3 +1,44 @@
+def prime_factors(n):
+    i = 2
+    factors = []
+    while i * i <= n:
+        if n % i:
+            i += 1
+        else:
+            n //= i
+            factors.append(i)
+    if n > 1:
+        factors.append(n)
+    return factors
+
+def CountFrequency(my_list):
+    freq = {}
+    for item in my_list:
+        if (item in freq):
+            freq[item] += 1
+        else:
+            freq[item] = 1
+    return freq
+
+def problem_5(n):
+    all_p_factors = {}
+    for i in reversed(range(1, n + 1)):
+        p_factors = prime_factors(i)
+        freq_dict = CountFrequency(p_factors)
+        for k, v in freq_dict.items():
+            if k in all_p_factors:
+                if v > all_p_factors[k]:
+                    all_p_factors[k] = v
+            else:
+                all_p_factors[k] = v
+    smallest_multiple = 1
+    for k, v in all_p_factors.items():
+        smallest_multiple *= k ** v
+    return smallest_multiple
+
+# ============================================================
+# ============================================================ 
+
 def problem_4(start, end):
     largest_i = 0
     largest_j = 0
